@@ -1,0 +1,37 @@
+body {
+  margin: 0;
+  /* --- PRUEBA TUS FUENTES AQUÍ --- */
+  /* Descomenta solo UNA de las siguientes tres líneas para probar la fuente */
+  /* font-family: 'Charter', serif;          /* Opción 1: Charter (Recomendada) */
+  /* font-family: 'Inter', sans-serif;         /* Opción 1: Inter (Recomendada) */
+  /*  font-family: 'Poppins', sans-serif;     /* Opción 2: Poppins */
+   font-family: 'Nunito Sans', sans-serif;  /* Opción 3: Nunito Sans */
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #f1f5f9;
+}
+/* ------------------------------------ */
+
+:root{
+  --azul:#014BA0; 
+  --madera:#783714; 
+  --amarillo:#F7D547; 
+  --rojo:#FF3936; 
+  --verde:#008311;
+  --blanco:#FFFFFF; 
+  --gris-claro:#E0E0E0; 
+  --gris-oscuro:#333333; 
+  --negro:#000000;
+  --radius:16px; 
+  --shadow:0 10px 24px rgba(0,0,0,.08);
+}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:.8rem 1.1rem;border:none;border-radius:14px;font-weight:700;box-shadow:var(--shadow);cursor:pointer}
+.btn--primary{background:var(--azul);color:var(--blanco)}
+.input{width:100%;padding:.9rem 1rem;border:1px solid var(--gris-claro);border-radius:12px}
+.input:focus{outline:none;border-color:var(--azul);box-shadow:0 0 0 3px rgba(1,75,160,.15)}
+.label{display:block;margin:0 0 .35rem .25rem}
+
+input, button, select, textarea {
+  font-family: inherit;
+}

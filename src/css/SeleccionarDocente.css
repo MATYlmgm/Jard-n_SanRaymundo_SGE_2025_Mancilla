@@ -1,0 +1,25 @@
+.sd-page { min-height: 100vh; background: #f1f5f9; padding: 24px; font-family: sans-serif; }
+.sd-container { max-width: 1200px; margin: 0 auto; }
+.sd-header {
+  background: linear-gradient(135deg, #014BA0 0%, #155e75 100%);
+  color: white; padding: 28px; border-radius: 24px; text-align: center;
+  margin-bottom: 24px; box-shadow: 0 10px 30px rgba(0,0,0,.1);
+}
+.sd-header h1 { margin: 0; font-size: 24px; }
+.sd-header p { margin: 4px 0 0; opacity: 0.9; }
+.sd-btn-volver {
+    background: white; border: 1px solid #e2e8f0; color: #334155;
+    padding: 10px 16px; border-radius: 12px; font-weight: 700;
+    cursor: pointer; margin-bottom: 24px; display: inline-block;
+}
+.sd-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+.sd-card {
+  background: white; border-radius: 16px; padding: 24px;
+  text-align: center; cursor: pointer; transition: all 0.2s ease;
+  border: 1px solid #e2e8f0; box-shadow: 0 4px 12px rgba(0,0,0,.05);
+}
+.sd-card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,.1); }
+.sd-icon { font-size: 36px; margin-bottom: 12px; }
+.sd-title { font-weight: 700; font-size: 16px; color: #1e293b; margin: 0 0 4px; }
+.sd-desc { font-size: 14px; color: #64748b; margin: 0; }
+.sd-empty { text-align: center; padding: 40px; background: white; border-radius: 16px; }

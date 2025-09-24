@@ -1,0 +1,59 @@
+:root{
+  --azul:#014BA0; --madera:#783714; --amarillo:#F7D547; --rojo:#FF3936;
+  --verde:#008311; --blanco:#FFFFFF; --gris-claro:#E0E0E0; --gris-oscuro:#333333;
+}
+
+.tedit-container{
+  min-height:100vh; background:#f1f5f9; display:flex; align-items:center; justify-content:center; padding:24px;
+}
+.tedit-card{
+  width:100%; max-width:760px; background:var(--blanco); border-radius:16px; box-shadow:0 10px 30px rgba(0,0,0,.08); overflow:hidden;
+}
+.tedit-header{ background:linear-gradient(135deg,var(--azul),var(--verde)); padding:28px 32px; color:#fff; }
+.tedit-header h1{ margin:0; font-size:22px; letter-spacing:.5px; }
+
+.tedit-form{ display:flex; flex-direction:column; gap:14px; padding:24px 24px 8px; }
+.tedit-label{ font-weight:600; color:var(--gris-oscuro); font-size:14px; }
+.tedit-input{
+  width:96%; height:56px; border:2px solid #d7dbe2; border-radius:12px; background:#fff; padding:0 16px; font-size:16px;
+  outline:none; transition:border .2s, box-shadow .2s;
+}
+.tedit-input:focus{ border-color:var(--azul); box-shadow:0 0 0 3px rgba(1,75,160,.12); }
+.tedit-input:disabled { background-color: #f3f4f6; color: #6b7280; cursor: not-allowed; }
+
+
+.tedit-fieldset{ border:none; margin-top:6px; }
+.tedit-legend{ font-weight:700; color:var(--gris-oscuro); margin-bottom:10px; }
+.tedit-radio-row{ display:flex; gap:28px; padding:6px 2px 14px; flex-wrap:wrap; }
+.tedit-radio{ display:flex; align-items:center; gap:10px; font-weight:600; color:var(--gris-oscuro); }
+.tedit-radio input{ accent-color:var(--azul); width:18px; height:18px; }
+
+.tedit-actions{ display:flex; justify-content:flex-end; padding:8px 0 20px; }
+.tedit-save{
+  background:var(--verde); color:#fff; border:none; border-radius:12px; min-width:160px; height:50px; font-weight:700; letter-spacing:.3px; cursor:pointer;
+  box-shadow:0 8px 22px rgba(0,131,17,.25); transition:transform .15s;
+}
+.tedit-save:hover{ transform:translateY(-1px); }
+
+.tedit-footer{ padding:16px 24px 22px; border-top:1px solid var(--gris-claro); display:flex; justify-content:flex-end; }
+.tedit-back{ color:var(--azul); text-decoration:none; font-weight:600; }
+.tedit-back:hover{ text-decoration:underline; }
+
+.tedit-password-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.tedit-password-wrapper .tedit-input {
+  padding-right: 45px; /* Deja espacio para el ícono */
+}
+
+.tedit-password-toggle {
+  position: absolute;
+  right: 15px;
+  cursor: pointer;
+  font-size: 20px;
+  user-select: none; /* Evita que el ícono se seleccione como texto */
+  color: #9ca3af;
+}

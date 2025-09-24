@@ -1,0 +1,165 @@
+.gc-page {
+  background: #f1f5f9;
+  min-height: 100vh;
+  padding: 24px;
+  font-family: sans-serif;
+}
+
+.gc-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.gc-header {
+  background: linear-gradient(135deg, #014BA0 0%, #783714 100%);
+  color: white;
+  padding: 28px;
+  border-radius: 24px;
+  text-align: center;
+  margin-bottom: 24px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.1);
+}
+
+.gc-header h1 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.gc-header p {
+  margin: 4px 0 0;
+  opacity: 0.9;
+}
+
+.gc-btn-volver {
+  background: white;
+  border: 1px solid #e2e8f0;
+  color: #334155;
+  padding: 10px 16px;
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-bottom: 24px;
+  display: inline-block;
+  transition: all 0.2s ease;
+}
+
+.gc-btn-volver:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,.08);
+}
+
+.gc-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 20px;
+}
+
+.gc-card {
+  background: white;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 4px 12px rgba(0,0,0,.05);
+  border: 1px solid #e2e8f0;
+}
+
+.gc-card h2 {
+  margin-top: 0;
+  font-size: 18px;
+  color: #1e293b;
+}
+
+.gc-form {
+  display: grid;
+  gap: 12px;
+}
+
+.gc-form select,
+.gc-form input,
+.gc-form textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.gc-btn {
+  border: none;
+  border-radius: 12px;
+  padding: 12px 24px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.gc-btn--primary {
+  background: #014BA0;
+  color: white;
+}
+.gc-btn--primary:hover {
+    filter: brightness(1.1);
+}
+
+.gc-list {
+  max-height: 400px;
+  overflow-y: auto;
+  display: grid;
+  gap: 8px;
+}
+
+.gc-list-item {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 16px;
+  padding: 12px;
+  border-radius: 8px;
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+}
+
+.gc-list-item div {
+  display: flex;
+  flex-direction: column;
+}
+
+.gc-curso-nombre {
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.gc-detalle {
+  font-size: 14px;
+  color: #64748b;
+  margin: 2px 0;
+}
+
+.gc-grado {
+  font-size: 12px;
+  color: #014BA0;
+  font-weight: 600;
+  background-color: #e0eaf6;
+  padding: 2px 6px;
+  border-radius: 4px;
+  align-self: flex-start;
+}
+
+.gc-delete-btn {
+  background: #fee2e2;
+  color: #b91c1c;
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+}
+
+.gc-delete-btn:hover {
+  background-color: #fecaca;
+}

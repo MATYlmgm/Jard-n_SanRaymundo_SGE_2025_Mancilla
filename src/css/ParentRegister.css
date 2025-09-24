@@ -1,0 +1,86 @@
+:root{
+  --azul:#014BA0; --madera:#783714; --amarillo:#F7D547;
+  --rojo:#FF3936; --verde:#008311; --blanco:#FFFFFF;
+  --gris-claro:#E0E0E0; --gris-oscuro:#333333; --negro:#000000;
+}
+
+.prg-page{
+  background:#f5f7fb;
+  min-height:100vh;
+  padding:24px;
+  display:flex;
+  align-items:flex-start;
+  justify-content:center;
+}
+
+.prg-card{
+  background:var(--blanco);
+  width:100%;
+  max-width:720px;
+  border-radius:16px;
+  box-shadow:0 10px 30px rgba(0,0,0,.06);
+  padding:28px 24px 32px;
+}
+
+.prg-title{
+  font-size:22px;
+  color:var(--gris-oscuro);
+  font-weight:700;
+  margin-bottom:18px;
+}
+
+.prg-form{ display:flex; flex-direction:column; gap:16px; }
+
+.prg-label{
+  font-size:14px; color:var(--gris-oscuro); font-weight:600;
+  display:flex; flex-direction:column; gap:8px;
+}
+
+.prg-input{
+  width:96%;
+  font-size:16px;
+  padding:12px 14px;
+  border:2px solid var(--gris-claro);
+  border-radius:10px;
+  outline:none;
+  background:#fff;
+  transition:.2s;
+}
+.prg-input:focus{
+  border-color:var(--azul);
+  box-shadow:0 0 0 3px rgba(1,75,160,.12);
+}
+
+.prg-textarea{ resize:vertical; }
+
+.prg-actions{
+  margin-top:8px;
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+}
+
+.prg-btn{
+  padding:12px 22px;
+  border-radius:10px;
+  border:none;
+  font-weight:700;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.prg-btn--ghost{
+  background:#eef2f7;
+  color:#475569;
+}
+.prg-btn--ghost:hover{ background:#e2e8f0; }
+
+.prg-btn--primary{
+  background:var(--azul);
+  color:#fff;
+  box-shadow:0 8px 18px rgba(1,75,160,.25);
+}
+.prg-btn--primary:hover{
+  filter:brightness(.95);
+  transform:translateY(-1px);
+}

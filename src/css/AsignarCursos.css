@@ -1,0 +1,164 @@
+.ac-page {
+  background: #f1f5f9;
+  min-height: 100vh;
+  padding: 24px;
+  font-family: sans-serif;
+}
+
+.ac-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.ac-header {
+  background: linear-gradient(135deg, #014BA0 0%, #377814 100%);
+  color: white;
+  padding: 28px;
+  border-radius: 24px;
+  text-align: center;
+  margin-bottom: 24px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.1);
+}
+.ac-header h1 { margin: 0; font-size: 24px; }
+.ac-header p { margin: 4px 0 0; opacity: 0.9; }
+
+.ac-btn-volver {
+  background: white;
+  border: 1px solid #e2e8f0;
+  color: #334155;
+  padding: 10px 16px;
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-bottom: 24px;
+  display: inline-block;
+  transition: all 0.2s ease;
+}
+.ac-btn-volver:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,.08);
+}
+
+.ac-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 20px;
+  /* ✅ LÍNEA CLAVE ELIMINADA: Se quitó 'align-items: start;' */
+}
+
+.ac-card {
+  background: white;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 4px 12px rgba(0,0,0,.05);
+  border: 1px solid #e2e8f0;
+}
+.ac-card h2 { margin-top: 0; font-size: 18px; color: #1e293b; }
+
+.ac-form { display: grid; gap: 12px; }
+.ac-form label { font-weight: 600; font-size: 14px; color: #334155; margin-bottom: -8px; }
+
+.ac-form select,
+.ac-form input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.ac-cursos-fieldset {
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    padding: 12px;
+}
+.ac-cursos-fieldset legend {
+    font-weight: 600;
+    font-size: 14px;
+    color: #334155;
+    padding: 0 8px;
+}
+.ac-cursos-checkboxes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 5px;
+    height: 100px;
+    overflow-y: auto;
+}
+.ac-cursos-checkboxes label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: normal;
+}
+
+.ac-form-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-top: 10px;
+}
+.ac-btn {
+  border: none;
+  border-radius: 12px;
+  padding: 12px 24px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.ac-btn--primary { background: #014BA0; color: white; }
+.ac-btn--secondary { background: #e2e8f0; color: #334155; }
+
+.ac-list {
+  display: grid;
+  gap: 8px;
+}
+
+.ac-list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f8fafc;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+}
+.ac-list-item div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ac-docente {
+  color: #1e293b;
+  font-weight: 700;
+}
+
+.ac-detalle {
+  color: #64748b;
+  font-size: 13px;
+}
+
+.ac-item-actions {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+}
+
+.ac-action-btn {
+  background: #e2e8f0;
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+}
+.ac-action-btn:hover { background-color: #cbd5e1; }
+.ac-delete-btn { background: #fee2e2; color: #b91c1c; }
+.ac-delete-btn:hover { background-color: #fecaca; }

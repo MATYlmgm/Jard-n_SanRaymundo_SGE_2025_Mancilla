@@ -1,0 +1,35 @@
+/* En src/css/ParentDashboard.css */
+.pd-page { min-height: 100vh; background: #f1f5f9; padding: 24px; }
+.pd-container { max-width: 1200px; margin: 0 auto; }
+
+.pd-header {
+    background: linear-gradient(135deg, var(--azul) 0%, var(--verde) 100%);
+    color: white; padding: 28px; border-radius: 24px;
+    text-align: center; margin-bottom: 24px;
+}
+.pd-header h1 { margin: 0; } .pd-header p { margin: 4px 0 0; opacity: 0.9; }
+
+.pd-btn-volver {
+    background: white; border: 1px solid #e2e8f0; color: #334155;
+    padding: 10px 16px; border-radius: 12px; font-weight: 700;
+    cursor: pointer; margin-bottom: 24px; display: inline-block;
+}
+
+.pd-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 24px; }
+.pd-card { background: white; border-radius: 16px; padding: 24px; box-shadow: var(--shadow); }
+.pd-card h2 { margin-top: 0; }
+
+.pd-card form { display: flex; flex-direction: column; gap: 16px; }
+.pd-card form input { padding: 12px; border: 1px solid #ccc; border-radius: 8px; }
+.pd-form-actions { display: flex; gap: 10px; justify-content: flex-end; }
+.pd-form-actions button { padding: 10px 20px; border: none; border-radius: 8px; cursor: pointer; }
+
+.pd-list { display: flex; flex-direction: column; gap: 10px; }
+.pd-list-item { display: flex; justify-content: space-between; align-items: center; padding: 10px; border-radius: 8px; background: #f8fafc; }
+.pd-list-item div:first-child { display: flex; flex-direction: column; }
+.pd-item-actions { display: flex; align-items: center; gap: 10px; }
+.pd-item-actions button { background: none; border: none; cursor: pointer; font-size: 18px; }
+
+.pd-badge { padding: 4px 10px; border-radius: 99px; font-weight: 700; font-size: 12px; }
+.pd-badge.active { background: #dcfce7; color: #166534; }
+.pd-badge.inactive { background: #fee2e2; color: #991b1b; }
