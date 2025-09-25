@@ -1,3 +1,5 @@
+
+
 // backend/controllers/notificationController.js
 const pool = require('../config/db');
 const { sendMessage } = require('../services/whatsappService');
@@ -141,7 +143,7 @@ const sendHomeworkReminder = async (req, res) => {
       }
     }
 
-    res.status(200).json({ msg: `Proceso completado. Mensajes enviados: ${successCount}. Errores: ${errorCount}. Notificaciones suspendidas por morosidad: ${suspendedCount}.` });
+    res.status(200).json({ msg: `Proceso completado. Mensajes enviados: ${successCount}. Errores: ${errorCount}. Notificaciones suspendidas por insolvencia: ${suspendedCount}.` });
 
   } catch (error) {
     console.error("Error en el proceso de envío de recordatorios de tareas:", error.message);
