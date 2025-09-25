@@ -242,6 +242,12 @@ export default function SecretaryPayments() {
                       <br />
                       <strong>Teléfono:</strong> {s.telefono || 'No asignado'}
                     </p>
+                    {/* --- AQUÍ ESTÁ LA CORRECCIÓN --- */}
+                    {s.meses_adeudados >= 2 && (
+                        <div className="sp-blocked-indicator">
+                            🚫 Bloqueado ({s.meses_adeudados} meses)
+                        </div>
+                    )}
                   </div>
                   <div className={`sp-badge ${s.estado_pago === "PENDIENTE" ? "pendiente" : "aldia"}`}>
                     {s.estado_pago === "PENDIENTE" ? "Pago pendiente" : "Al día"}

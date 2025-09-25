@@ -1,5 +1,3 @@
-
-
 // backend/controllers/studentController.js
 const pool = require('../config/db');
 

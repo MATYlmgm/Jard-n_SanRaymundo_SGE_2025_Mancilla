@@ -1,5 +1,3 @@
-
-
 // backend/controllers/notificationController.js
 const pool = require('../config/db');
 const { sendMessage } = require('../services/whatsappService');
