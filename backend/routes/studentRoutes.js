@@ -1,22 +1,28 @@
+routes/studentRoutes.js
+
 const express = require('express');
 const router = express.Router();
 const authMiddleware = require('../middleware/authMiddleware');
+
 const { 
-  createStudent, 
-  linkParentToStudent,
-  getStudentsWithDetails,  
-  updateFinancialStatus,
-  getAllStudentsForCoordinator,
-  getStudentByCui,
-  updateStudent,
-  deactivateStudent,
-  activateStudent
+    createStudent,
+    getStudentsWithDetails,
+    getFinancialStatusByCui,
+    markMonthAsPaid,
+    getAllStudentsForCoordinator,
+    getStudentByCui,
+    updateStudent,
+    deactivateStudent,
+    activateStudent
 } = require('../controllers/studentController');
 
 // --- RUTAS DE SECRETARÍA (las más específicas van primero) ---
 router.get('/details', authMiddleware, getStudentsWithDetails);
-router.post('/financial-status', authMiddleware, updateFinancialStatus);
-router.post('/link-parent', authMiddleware, linkParentToStudent);
+// Obtiene el historial de pagos de un alumno específico
+router.get('/:cui/financial-status', authMiddleware, getFinancialStatusByCui);
+
+// Registra el pago de un mes para un alumno
+router.post('/:cui/payments', authMiddleware, markMonthAsPaid);
 
 // --- RUTAS DE GESTIÓN (Coordinador) ---
 router.get('/', authMiddleware, getAllStudentsForCoordinator);

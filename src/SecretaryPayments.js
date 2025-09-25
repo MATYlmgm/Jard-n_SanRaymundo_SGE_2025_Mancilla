@@ -1,10 +1,10 @@
 import { auth } from './auth';
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useCallback } from "react";
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import "./css/SecretaryPayments.css";
 
-// --- Componente del Modal (sin cambios) ---
+// Componente de edición de mensaje (el que ya tenías, no cambia)
 const MessageEditorModal = ({ student, onClose, onSend }) => {
     const defaultMessage = `Estimado/a ${student.nombre_padre}, le saludamos del Colegio "El Jardín". Le recordamos amablemente que el pago de la colegiatura para el/la estudiante ${student.nombre_completo} se encuentra pendiente. ¡Gracias!`;
     const [message, setMessage] = useState(defaultMessage);
@@ -41,7 +41,6 @@ const MessageEditorModal = ({ student, onClose, onSend }) => {
     );
 };
 
-
 // --- Componente Principal ---
 export default function SecretaryPayments() {
   const [students, setStudents] = useState([]);
@@ -50,19 +49,20 @@ export default function SecretaryPayments() {
   const [searchTerm, setSearchTerm] = useState("");
   const [editingStudent, setEditingStudent] = useState(null);
   const [sendingAll, setSendingAll] = useState(false);
+  const [selectedPeriod, setSelectedPeriod] = useState(new Date().toISOString().slice(0, 7));
   
   const navigate = useNavigate();
   const role = auth.getRole();
-  const isSecretary = role === 1; // Simplificado para mayor claridad
+  const isSecretary = role === 1;
   const backPath = isSecretary ? '/secretary/dashboard' : '/coordinator/dashboard';
 
-
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     try {
       setLoading(true);
       const token = localStorage.getItem('accessToken');
       const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/students/details`, {
-        headers: { Authorization: `Bearer ${token}` }
+        headers: { Authorization: `Bearer ${token}` },
+        params: { periodo: selectedPeriod }
       });
       setStudents(res.data);
     } catch (err) {
@@ -71,30 +71,32 @@ export default function SecretaryPayments() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [selectedPeriod]);
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [fetchData]);
 
-  const markAsSolvent = async (cui_estudiante) => {
-    if (window.confirm("¿Confirmas que el estudiante está solvente para el mes actual?")) {
-      try {
-        const token = localStorage.getItem('accessToken');
-        await axios.put(`${process.env.REACT_APP_API_URL}/api/students/financial-status/${cui_estudiante}`, 
-          { estado: 'Solvente' }, 
-          { headers: { Authorization: `Bearer ${token}` } }
-        );
-        alert("Estado actualizado a solvente.");
-        fetchData();
-      } catch (err) {
-        alert("Error al actualizar el estado.");
-        console.error("Error updating status:", err);
-      }
+  // ✅ NUEVA FUNCIÓN: Marca el mes seleccionado como pagado para un estudiante.
+  const handleMarkAsPaid = async (cui_estudiante) => {
+    const monthName = monthOptions.find(m => m.value === selectedPeriod)?.label || selectedPeriod;
+    if (window.confirm(`¿Confirmas el pago de ${monthName} para este estudiante?`)) {
+        try {
+            const token = localStorage.getItem('accessToken');
+            await axios.post(
+                `${process.env.REACT_APP_API_URL}/api/students/${cui_estudiante}/payments`,
+                { periodo: selectedPeriod }, // Envía el mes que está seleccionado en el filtro
+                { headers: { Authorization: `Bearer ${token}` } }
+            );
+            alert("Pago registrado con éxito.");
+            fetchData(); // Refresca la lista para mostrar el nuevo estado
+        } catch (err) {
+            alert("Error al registrar el pago.");
+            console.error("Error al marcar como pagado:", err);
+        }
     }
   };
 
-  // Esta función para envío individual ya estaba correcta
   const sendReminder = async (customMessage) => {
     try {
         const token = localStorage.getItem('accessToken');
@@ -112,22 +114,21 @@ export default function SecretaryPayments() {
     }
   };
 
-  // ✅ CORRECCIÓN: Esta es la nueva función, más simple y funcional.
   const handleSendAll = async () => {
-    if (!window.confirm('¿Desea enviar un recordatorio de pago a TODOS los estudiantes con estado "PENDIENTE"?')) {
+    const monthName = monthOptions.find(m => m.value === selectedPeriod)?.label || selectedPeriod;
+    if (!window.confirm(`¿Desea enviar un recordatorio de pago a TODOS los estudiantes con estado "PENDIENTE" para ${monthName}?`)) {
       return;
     }
   
     setSendingAll(true);
   
     try {
-      // 1. Filtramos para obtener solo los CUIs de los estudiantes pendientes
       const pendingStudentsCUIs = students
         .filter(student => student.estado_pago === 'PENDIENTE')
         .map(student => student.cui_estudiante);
   
       if (pendingStudentsCUIs.length === 0) {
-        alert("No se encontraron estudiantes con pagos pendientes.");
+        alert("No se encontraron estudiantes con pagos pendientes para este mes.");
         setSendingAll(false);
         return;
       }
@@ -135,17 +136,14 @@ export default function SecretaryPayments() {
       const token = localStorage.getItem('accessToken');
       const payload = {
         studentCUIs: pendingStudentsCUIs,
-        // No enviamos mensaje personalizado, el backend usará el predeterminado
       };
   
-      // 2. Llamamos a la ruta CORRECTA con la lista de CUIs
       const response = await axios.post(
         `${process.env.REACT_APP_API_URL}/api/notifications/payment-reminder`,
         payload,
         { headers: { Authorization: `Bearer ${token}` } }
       );
   
-      // 3. Mostramos el mensaje de resumen que nos da el backend
       alert(response.data.msg);
   
     } catch (err) {
@@ -164,6 +162,16 @@ export default function SecretaryPayments() {
     [students, searchTerm]
   );
   
+  const year = new Date().getFullYear();
+  const monthOptions = [
+      { label: `Enero ${year}`, value: `${year}-01` }, { label: `Febrero ${year}`, value: `${year}-02` },
+      { label: `Marzo ${year}`, value: `${year}-03` }, { label: `Abril ${year}`, value: `${year}-04` },
+      { label: `Mayo ${year}`, value: `${year}-05` }, { label: `Junio ${year}`, value: `${year}-06` },
+      { label: `Julio ${year}`, value: `${year}-07` }, { label: `Agosto ${year}`, value: `${year}-08` },
+      { label: `Septiembre ${year}`, value: `${year}-09` }, { label: `Octubre ${year}`, value: `${year}-10` },
+      { label: `Noviembre ${year}`, value: `${year}-11` }, { label: `Diciembre ${year}`, value: `${year}-12` }
+  ];
+
   if (loading) return <div className="sp-page">Cargando...</div>;
   if (error) return <div className="sp-page"><div className="sp-error">{error}</div></div>;
 
@@ -176,10 +184,11 @@ export default function SecretaryPayments() {
               onSend={sendReminder}
           />
       )}
+    
       <div className="sp-container">
         <header className="sp-header">
           <h1>Panel de Pagos y Solvencia</h1>
-          <p>Estado financiero de los estudiantes para el mes en curso.</p>
+          <p>Gestión de pagos mensuales de los estudiantes.</p>
         </header>
 
         <nav className="sp-navbar">
@@ -201,6 +210,14 @@ export default function SecretaryPayments() {
               </button>
             )}
           </div>
+
+          <select 
+            className="sp-month-selector" 
+            value={selectedPeriod} 
+            onChange={e => setSelectedPeriod(e.target.value)}
+          >
+            {monthOptions.map(opt => <option key={opt.value} value={opt.value}>{opt.label}</option>)}
+          </select>
 
           <input 
             type="text"
@@ -231,17 +248,20 @@ export default function SecretaryPayments() {
                   </div>
                 </div>
                 
-                {isSecretary && s.estado_pago === 'PENDIENTE' && (
+                {isSecretary && (
                   <div className="sp-actions">
                     <button className="sp-chip sp-chipYellow" onClick={() => setEditingStudent(s)}>
-                      ✏️ Editar y Enviar
+                      ✏️ Enviar Recordatorio
                     </button>
-                    <button 
-                      className="sp-chip sp-chipBlue" 
-                      onClick={() => markAsSolvent(s.cui_estudiante)}
-                    >
-                      ✅ Marcar solvente
-                    </button>
+                    {/* ✅ CORRECCIÓN: Este botón solo aparece si el estado es PENDIENTE */}
+                    {s.estado_pago === 'PENDIENTE' && (
+                      <button 
+                        className="sp-chip sp-chipBlue" 
+                        onClick={() => handleMarkAsPaid(s.cui_estudiante)}
+                      >
+                        ✅ Marcar Solvente
+                      </button>
+                    )}
                   </div>
                 )}
               </article>

@@ -1,3 +1,4 @@
+
 // backend/controllers/studentController.js
 const pool = require('../config/db');
 
@@ -197,22 +198,63 @@ const linkParentToStudent = async (req, res) => {
   }
 };
 
+// ✅ NUEVA FUNCIÓN: Obtiene todos los períodos pagados para un estudiante
+const getFinancialStatusByCui = async (req, res) => {
+  const { cui } = req.params;
+  try {
+    const query = `
+      SELECT periodo FROM estado_financiero 
+      WHERE cui_estudiante = $1 AND estado = 'Solvente'
+    `;
+    const { rows } = await pool.query(query, [cui]);
+    // Devolvemos un array simple con los períodos, ej: ["2025-01", "2025-02"]
+    res.json(rows.map(r => r.periodo));
+  } catch (err) {
+    console.error(`Error al obtener estado financiero para ${cui}:`, err.message);
+    res.status(500).send("Error en el servidor");
+  }
+};
+
+// ✅ NUEVA FUNCIÓN: Marca un mes específico como solvente para un estudiante
+const markMonthAsPaid = async (req, res) => {
+  const { cui } = req.params;
+  const { periodo } = req.body; // ej: "2025-03"
+
+  if (!periodo) {
+    return res.status(400).json({ msg: 'Se requiere el período (mes).' });
+  }
+
+  try {
+    const query = `
+      INSERT INTO estado_financiero (cui_estudiante, periodo, estado, cuotas_pendientes)
+      VALUES ($1, $2, 'Solvente', 0)
+      ON CONFLICT (cui_estudiante, periodo) 
+      DO UPDATE SET 
+        estado = EXCLUDED.estado,
+        cuotas_pendientes = EXCLUDED.cuotas_pendientes,
+        actualizado_en = NOW();
+    `;
+    await pool.query(query, [cui, periodo]);
+    res.json({ msg: `El período ${periodo} ha sido marcado como solvente.` });
+  } catch (err) {
+    console.error(`Error al actualizar estado financiero para ${cui}:`, err.message);
+    res.status(500).send('Error al actualizar el estado financiero');
+  }
+};
+
 // --- Obtener todos los Estudiantes con detalles para Secretaría (VERSIÓN MEJORADA) ---
 const getStudentsWithDetails = async (req, res) => {
   try {
-    // Obtenemos el período actual en formato 'YYYY-MM', ej: '2025-09'
-    const currentPeriod = new Date().toISOString().slice(0, 7);
+    // ✅ CORRECCIÓN: Leemos el 'periodo' que nos envía el frontend desde la URL
+    const { periodo } = req.query;
+
+    // Si el frontend no especifica un mes, usamos el mes actual como antes.
+    const targetPeriod = periodo || new Date().toISOString().slice(0, 7);
 
     const query = `
       SELECT
-        e.cui_estudiante,
-        e.nombres || ' ' || e.apellidos AS nombre_completo,
-        p.nombre_completo AS nombre_padre,
-        p.telefono,
-        g.nombre_grado,
-        -- Ahora el estado es dinámico:
-        -- Si existe un registro 'Solvente' para el mes actual, se muestra 'AL_DIA'.
-        -- Si no, se muestra 'PENDIENTE'.
+        e.cui_estudiante, e.nombres || ' ' || e.apellidos AS nombre_completo,
+        p.nombre_completo AS nombre_padre, p.telefono, g.nombre_grado,
         CASE 
           WHEN ef.estado = 'Solvente' THEN 'AL_DIA'
           ELSE 'PENDIENTE'
@@ -221,11 +263,13 @@ const getStudentsWithDetails = async (req, res) => {
       LEFT JOIN grados g ON e.id_grado = g.id_grado
       LEFT JOIN alumno_responsable ar ON e.cui_estudiante = ar.cui_estudiante AND ar.principal = TRUE
       LEFT JOIN padres p ON ar.cui_padre = p.cui_padre
-      -- Hacemos un LEFT JOIN con el estado financiero SOLO para el período actual
+      -- ✅ CORRECCIÓN: Usamos el 'targetPeriod' para filtrar el estado financiero
       LEFT JOIN estado_financiero ef ON e.cui_estudiante = ef.cui_estudiante AND ef.periodo = $1
+      WHERE e.estado_id = 1
       ORDER BY e.apellidos, e.nombres;
     `;
-    const { rows } = await pool.query(query, [currentPeriod]); // Pasamos el período actual como parámetro
+    // Pasamos el mes deseado como parámetro a la consulta
+    const { rows } = await pool.query(query, [targetPeriod]);
     res.json(rows);
   } catch (err) {
     console.error(err.message);
@@ -288,5 +332,7 @@ module.exports = {
   getStudentByCui,             
   updateStudent,                
   deactivateStudent,
-  activateStudent  
+  activateStudent,
+  getFinancialStatusByCui,
+  markMonthAsPaid
 };
