@@ -40,7 +40,6 @@ const RegistroDocente = () => {
       });
       alert('Docente registrado con éxito.');
       setForm(initialFormState);
-      // ✅ CORRECCIÓN 1: Se usa la ruta correcta
       navigate('/docentes'); 
     } catch (error) {
       console.error("Error al registrar docente:", error);
@@ -97,7 +96,7 @@ const RegistroDocente = () => {
           </div>
         </form>
         <div className="treg-footer">
-          {/* ✅ CORRECCIÓN 2: Se usa la ruta correcta */}
+          {/**/}
           <button onClick={() => navigate('/docentes')} className="treg-cancel-btn">
             Cancelar y Volver
           </button>

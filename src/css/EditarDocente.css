@@ -46,7 +46,7 @@
 }
 
 .tedit-password-wrapper .tedit-input {
-  padding-right: 45px; /* Deja espacio para el ícono */
+  padding-right: 45px;
 }
 
 .tedit-password-toggle {
@@ -54,6 +54,6 @@
   right: 15px;
   cursor: pointer;
   font-size: 20px;
-  user-select: none; /* Evita que el ícono se seleccione como texto */
+  user-select: none;
   color: #9ca3af;
 }

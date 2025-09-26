@@ -4,7 +4,7 @@ import axios from "axios";
 import { auth } from "./auth";
 import './css/TeacherDashboard.css';
 
-// --- (Componente TaskModal no cambia) ---
+
 const TaskModal = ({ assignmentId, courses, taskToEdit, onClose, onSave }) => {
     const [form, setForm] = useState({ titulo: '', fecha_entrega: '', id_curso: '' });
 
@@ -259,7 +259,6 @@ const FullTeacherDashboard = () => {
       }, {});
     }, [tasks]);
 
-  // --- (El resto del componente y el JSX no cambian) ---
   return (
       <div className="tdb-page">
         <div className="tdb-container">

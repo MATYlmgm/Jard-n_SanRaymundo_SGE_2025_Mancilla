@@ -1,4 +1,3 @@
-/* Paleta de colores principal */
 :root {
   --azul: #014BA0;
   --verde: #008311;
@@ -108,7 +107,7 @@
 }
 
 .login-button:hover:not(:disabled) {
-  background: #006e0e; /* Un verde un poco más oscuro */
+  background: #006e0e;
   transform: translateY(-1px);
 }
 

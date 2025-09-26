@@ -1,4 +1,4 @@
-const pool = require('../config/db'); // Importa la conexión
+const pool = require('../config/db'); 
 
 // --- Crear un nuevo Padre/Encargado ---
 const createParent = async (req, res) => {

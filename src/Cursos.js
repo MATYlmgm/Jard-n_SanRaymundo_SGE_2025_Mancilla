@@ -6,7 +6,7 @@ export default function Cursos() {
   return (
     <Routes>
       <Route index element={<GestionCursos />} />
-      {/* Aquí podrías añadir rutas para editar cursos en el futuro */}
+      {}
     </Routes>
   );
 }

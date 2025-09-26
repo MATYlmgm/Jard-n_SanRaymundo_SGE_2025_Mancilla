@@ -1,4 +1,3 @@
-// en backend/index.js
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');

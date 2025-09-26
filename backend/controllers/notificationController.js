@@ -16,7 +16,6 @@ const sendPaymentReminder = async (req, res) => {
     let suspendedCount = 0; // Contador para los suspendidos
 
     for (const cui of studentCUIs) {
-        // --- ¡AQUÍ ESTÁ LA LÓGICA CLAVE! ---
         // Verificamos cuántos meses debe el estudiante
         const debtMonths = await getStudentDebtStatus(cui);
 
@@ -25,7 +24,6 @@ const sendPaymentReminder = async (req, res) => {
             suspendedCount++;
             continue; // Pasamos al siguiente estudiante
         }
-        // --- FIN DE LA LÓGICA CLAVE ---
 
 
       // 1. Buscar al padre del estudiante
@@ -73,7 +71,7 @@ const sendPaymentReminder = async (req, res) => {
   }
 };
 
-// --- NUEVA FUNCIÓN PARA RECORDATORIOS DE TAREAS ---
+// --- FUNCIÓN PARA RECORDATORIOS DE TAREAS ---
 const sendHomeworkReminder = async (req, res) => {
   // Recibimos una lista de CUIs de estudiantes y el ID de la asignación
   const { studentCUIs, assignmentId } = req.body;
@@ -89,7 +87,6 @@ const sendHomeworkReminder = async (req, res) => {
 
     // Recorremos cada CUI de estudiante que nos enviaron
     for (const cui of studentCUIs) {
-        // --- ¡AQUÍ ESTÁ LA LÓGICA CLAVE! ---
         // Verificamos cuántos meses debe el estudiante
         const debtMonths = await getStudentDebtStatus(cui);
 
@@ -98,7 +95,6 @@ const sendHomeworkReminder = async (req, res) => {
             suspendedCount++;
             continue; // Pasamos al siguiente estudiante
         }
-        // --- FIN DE LA LÓGICA CLAVE ---
 
       // 1. Buscamos al padre del estudiante y su teléfono
       const parentQuery = `
@@ -137,7 +133,7 @@ const sendHomeworkReminder = async (req, res) => {
           }
         }
       } else {
-        errorCount++; // Contamos como error si no se encuentra al padre
+        errorCount++; 
       }
     }
 
@@ -152,5 +148,5 @@ const sendHomeworkReminder = async (req, res) => {
 // ACTUALIZA EL MODULE.EXPORTS
 module.exports = { 
   sendPaymentReminder,
-  sendHomeworkReminder // <-- Añade la nueva función aquí
+  sendHomeworkReminder 
 };

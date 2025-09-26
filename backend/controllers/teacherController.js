@@ -104,7 +104,7 @@ const registerTeacherAndUser = async (req, res) => {
   }
 };
 
-// ✅ PRIMERA CORRECCIÓN: Se construye el campo 'description' para el menú desplegable.
+// Se construye el campo 'description' para el menú desplegable.
 const getTeacherAssignments = async (req, res) => {
   try {
     const { cui } = req.params;
@@ -131,7 +131,7 @@ const getTeacherAssignments = async (req, res) => {
   }
 };
 
-// ✅ SEGUNDA CORRECCIÓN: Se añaden grado, sección y año a la respuesta.
+// Se añaden grado, sección y año a la respuesta.
 const getAssignmentData = async (req, res) => {
   const { assignmentId } = req.params;
   try {
@@ -183,7 +183,7 @@ const getAssignmentData = async (req, res) => {
   }
 };
 
-// --- CREAR TAREA (Función existente) ---
+// --- CREAR TAREA ---
 const createTask = async (req, res) => {
     const { id_asignacion, id_curso, titulo, fecha_entrega } = req.body;
     try {
@@ -205,7 +205,7 @@ const createTask = async (req, res) => {
     }
 };
 
-// --- GUARDAR ENTREGAS (Función existente) ---
+// --- GUARDAR ENTREGAS ---
 const saveDeliveries = async (req, res) => {
     const { deliveries } = req.body;
     if (!Array.isArray(deliveries) || deliveries.length === 0) return res.status(400).json({ msg: 'No se proporcionaron datos.' });
@@ -328,7 +328,7 @@ const updateTask = async (req, res) => {
     }
 };
 
-// --- NUEVA FUNCIÓN: ELIMINAR UNA TAREA ---
+// --- FUNCIÓN: ELIMINAR UNA TAREA ---
 const deleteTask = async (req, res) => {
     const { taskId } = req.params;
     try {

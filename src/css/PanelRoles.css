@@ -1,6 +1,3 @@
-/* src/PanelRoles.css */
-
-/* ============= PALETA ============= */
 :root{
   --azul:#014BA0;         /* Azul Jardín */
   --madera:#783714;       /* Café Madera */
@@ -18,16 +15,13 @@
   --shadow-sm:0 2px 8px rgba(0,0,0,.08);
 }
 
-/* ============= BASE ============= */
 *{box-sizing:border-box}
 html,body,#root{height:100%}
 body{margin:0;background:#f5f7fb;color:var(--gris);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,system-ui,Arial,sans-serif}
 
-/* ============= LAYOUT ============= */
 .pr-page{min-height:100%;display:flex;align-items:flex-start;justify-content:center;padding:28px}
 .pr-container{width:100%;max-width:1200px}
 
-/* ============= HEADER ============= */
 .pr-header{
   position:relative;
   border-radius:24px;
@@ -39,7 +33,6 @@ body{margin:0;background:#f5f7fb;color:var(--gris);font-family:-apple-system,Bli
   text-align:center;
 }
 
-/* grilla decorativa sutil */
 .pr-grid{
   position:absolute;inset:0;pointer-events:none;opacity:.12;
   background-image:linear-gradient(rgba(255,255,255,.15) 1px, transparent 1px),
@@ -47,40 +40,36 @@ body{margin:0;background:#f5f7fb;color:var(--gris);font-family:-apple-system,Bli
   background-size:32px 32px;
 }
 
-/* LOGO grande, sin “burbuja” */
 .pr-logoBig{
-  width:160px;               /* 120 -> 160 (usa 180 si prefieres más grande) */
+  width:160px;              
   height:160px;
-  object-fit:contain;        /* mantiene la proporción de la imagen */
+  object-fit:contain;        
   display:block;
   margin:0 auto 14px;
-  border-radius:0;           /* sin bordes redondeados */
+  border-radius:0;          
   background:transparent;
   padding:0;
-  box-shadow:none;           /* quita la sombra tipo “burbuja” */
-  filter:none;               /* elimina cualquier drop-shadow previo */
+  box-shadow:none;           
+  filter:none;               
 }
 
 .pr-title{font-size:28px;letter-spacing:.5px;margin:6px 0 4px;font-weight:800;text-transform:uppercase}
 .pr-sub{margin:0 0 6px;font-weight:600;opacity:.95}
 .pr-system{margin:0;opacity:.9;font-size:14px}
 
-/* ============= GRID ROLES (3 arriba, 2 abajo) ============= */
 .pr-gridRoles{
-  margin-top:-28px;       /* sube un poquito hacia el header */
+  margin-top:-28px;     
   padding:32px 20px 8px;
   display:grid;
   gap:20px;
 }
 
 .pr-grid-3-2{
-  /* 3 columnas fijas; el 5º ítem “baja” solo */
   grid-template-columns:repeat(3, 1fr);
 }
 .pr-grid-3-2 > *:nth-child(4){grid-column:1}
 .pr-grid-3-2 > *:nth-child(5){grid-column:2}
 
-/* Responsivo */
 @media (max-width: 1024px){
   .pr-grid-3-2{grid-template-columns:repeat(2,1fr)}
   .pr-grid-3-2 > *:nth-child(4){grid-column:auto}
@@ -90,7 +79,6 @@ body{margin:0;background:#f5f7fb;color:var(--gris);font-family:-apple-system,Bli
   .pr-grid-3-2{grid-template-columns:1fr}
 }
 
-/* ============= CARD ============= */
 .pr-card{
   appearance:none;border:none;background:var(--blanco);
   border-radius:18px;box-shadow:var(--shadow-sm);
@@ -107,18 +95,15 @@ body{margin:0;background:#f5f7fb;color:var(--gris);font-family:-apple-system,Bli
 .pr-card:hover{transform:translateY(-4px); box-shadow:var(--shadow-md); border-color:rgba(1,75,160,.15)}
 .pr-card:hover::before{transform:translateX(100%)}
 
-/* Icono/emoji grande */
 .pr-icon{font-size:40px; line-height:1; margin-bottom:10px; z-index:1}
 .pr-cardTitle{margin:0; font-size:16px; font-weight:800; letter-spacing:.4px; z-index:1}
 
-/* Tonos por rol (suave, respetando paleta) */
 .t-amarillo{background:linear-gradient(180deg,#fffaf0 0%, #fff3c9 100%)}
 .t-verde{background:linear-gradient(180deg,#f0fff4 0%, #dcfbe4 100%)}
 .t-azul{background:linear-gradient(180deg,#eef6ff 0%, #dbeafe 100%)}
 .t-lila{background:linear-gradient(180deg,#faf5ff 0%, #f3e8ff 100%)}
 .t-madera{background:linear-gradient(180deg,#fff7ed 0%, #fdeedc 100%)}
 
-/* ============= ACCIONES / FOOTER ============= */
 .pr-actions{display:flex;justify-content:center;gap:12px;margin:18px 0 6px}
 .pr-btn{
   padding:12px 18px;border:none;border-radius:12px;font-weight:700;cursor:pointer;
@@ -130,7 +115,6 @@ body{margin:0;background:#f5f7fb;color:var(--gris);font-family:-apple-system,Bli
 
 .pr-footer{margin-top:10px;text-align:center;color:#64748b}
 
-/* ============= TOAST ============= */
 .pr-toast{
   position:fixed; top:20px; right:20px; padding:14px 18px; border-radius:12px;
   background:var(--verde); color:var(--blanco); box-shadow:var(--shadow-md);

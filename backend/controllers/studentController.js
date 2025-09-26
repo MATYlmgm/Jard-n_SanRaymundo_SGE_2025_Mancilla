@@ -187,7 +187,7 @@ const linkParentToStudent = async (req, res) => {
   }
 };
 
-// ✅ NUEVA FUNCIÓN: Obtiene todos los períodos pagados para un estudiante
+// FUNCIÓN: Obtiene todos los períodos pagados para un estudiante
 const getFinancialStatusByCui = async (req, res) => {
   const { cui } = req.params;
   try {
@@ -203,7 +203,7 @@ const getFinancialStatusByCui = async (req, res) => {
   }
 };
 
-// ✅ NUEVA FUNCIÓN: Marca un mes específico como solvente para un estudiante
+// FUNCIÓN: Marca un mes específico como solvente para un estudiante
 const markMonthAsPaid = async (req, res) => {
   const { cui } = req.params;
   const { periodo } = req.body;
@@ -230,13 +230,12 @@ const markMonthAsPaid = async (req, res) => {
   }
 };
 
-// --- Obtener todos los Estudiantes con detalles para Secretaría (VERSIÓN MEJORADA) ---
+// --- Obtener todos los Estudiantes con detalles para Secretaría ---
 const getStudentsWithDetails = async (req, res) => {
   try {
     const { periodo } = req.query;
     const targetPeriod = periodo || new Date().toISOString().slice(0, 7);
 
-    // ✅ CONSULTA CORREGIDA Y SIMPLIFICADA
     const query = `
       SELECT
         e.cui_estudiante,
@@ -299,10 +298,9 @@ const updateFinancialStatus = async (req, res) => {
   }
 };
 
-// --- OBTENER ESTADO DE MOROSIDAD DE UN ESTUDIANTE ---
+// --- OBTENER ESTADO DE INSOLVENTE DE UN ESTUDIANTE ---
 const getStudentDebtStatus = async (cui_estudiante) => {
   try {
-    // --- ESTA ES LA LÓGICA CORREGIDA ---
     const query = `
       SELECT COUNT(*) as meses_adeudados
       FROM generate_series(
@@ -326,7 +324,6 @@ const getStudentDebtStatus = async (cui_estudiante) => {
   }
 };
 
-// No olvides exportar las nuevas funciones al final del archivo
 module.exports = {
   getStudentsWithDetails,
   getFinancialStatusByCui,

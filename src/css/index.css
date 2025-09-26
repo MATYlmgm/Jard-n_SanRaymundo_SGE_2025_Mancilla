@@ -1,17 +1,12 @@
 body {
   margin: 0;
-  /* --- PRUEBA TUS FUENTES AQUÍ --- */
-  /* Descomenta solo UNA de las siguientes tres líneas para probar la fuente */
-  /* font-family: 'Charter', serif;          /* Opción 1: Charter (Recomendada) */
-  /* font-family: 'Inter', sans-serif;         /* Opción 1: Inter (Recomendada) */
-  /*  font-family: 'Poppins', sans-serif;     /* Opción 2: Poppins */
-   font-family: 'Nunito Sans', sans-serif;  /* Opción 3: Nunito Sans */
+   font-family: 'Nunito Sans', sans-serif;
 
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #f1f5f9;
 }
-/* ------------------------------------ */
+
 
 :root{
   --azul:#014BA0; 

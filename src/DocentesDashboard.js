@@ -39,7 +39,7 @@ export default function DocentesDashboard() {
           headers: { Authorization: `Bearer ${token}` },
         });
 
-        fetchDocentes(); // Recargar la lista
+        fetchDocentes(); 
         alert('Docente dado de baja con éxito.');
       } catch (error) {
         alert('Error al dar de baja al docente.');

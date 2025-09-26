@@ -48,12 +48,12 @@
   display: flex;
   justify-content: center;
   padding: 2rem 0;
-  background-color: #f1f5f9; /* O el color de fondo que prefieras */
+  background-color: #f1f5f9; 
 }
 
 .formulario-card {
   width: 100%;
-  max-width: 800px; /* Ancho máximo para el formulario */
+  max-width: 800px;
 }
 
 .treg-password-wrapper {
@@ -63,7 +63,7 @@
 }
 
 .treg-password-wrapper .treg-input {
-  padding-right: 45px; /* Deja espacio para el ícono */
+  padding-right: 45px;
 }
 
 .treg-password-toggle {

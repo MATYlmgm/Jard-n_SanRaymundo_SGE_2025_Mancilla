@@ -1,5 +1,4 @@
 // backend/config/db.js
-// Cargar .env y Pool (como ya lo tenés)
 require('dotenv').config();
 const { Pool } = require('pg');
 
@@ -14,7 +13,7 @@ const pool = new Pool({
 });
 */
 
-// --- NUEVO CÓDIGO CON CONEXIÓN A NEON ---
+// --- CONEXIÓN A NEON ---
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: {
@@ -22,7 +21,6 @@ const pool = new Pool({
   }
 });
 
-// <<< AÑADE ESTO >>>
 pool.on('connect', async (client) => {
   await client.query("SET search_path TO mat_jardin, public;");
 });

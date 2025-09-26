@@ -15,14 +15,13 @@ const GestionCursos = () => {
   });
 
   const [loading, setLoading] = useState(true);
-  const API_URL = process.env.REACT_APP_API_URL; // Variable para la URL de la API
+  const API_URL = process.env.REACT_APP_API_URL;
 
   const fetchData = async () => {
     const token = localStorage.getItem('accessToken');
     try {
       setLoading(true);
       const [cursosRes, gradosRes] = await Promise.all([
-        // ✅ CORRECCIÓN: Se usa la variable de entorno
         axios.get(`${API_URL}/api/cursos`, { headers: { Authorization: `Bearer ${token}` } }),
         axios.get(`${API_URL}/api/grades`, { headers: { Authorization: `Bearer ${token}` } }),
       ]);
@@ -56,11 +55,10 @@ const GestionCursos = () => {
       id_grado: form.id_grado === '' ? null : Number(form.id_grado),
     };
     try {
-      // ✅ CORRECCIÓN: Se usa la variable de entorno
       await axios.post(`${API_URL}/api/cursos`, payload, { headers: { Authorization: `Bearer ${token}` } });
       alert('Curso creado con éxito.');
-      setForm({ nombre_curso: '', descripcion_curso: '', id_grado: '' }); // Limpiar formulario
-      fetchData(); // Recargar la lista de cursos
+      setForm({ nombre_curso: '', descripcion_curso: '', id_grado: '' });
+      fetchData();
     } catch (error) {
       console.error("Error al crear el curso:", error);
       alert('Error al crear el curso: ' + (error.response?.data?.msg || 'Error desconocido.'));
@@ -71,10 +69,9 @@ const GestionCursos = () => {
     if (window.confirm('¿Estás seguro de que quieres eliminar este curso? Esta acción no se puede deshacer.')) {
       const token = localStorage.getItem('accessToken');
       try {
-        // ✅ CORRECCIÓN: Se usa la variable de entorno
         await axios.delete(`${API_URL}/api/cursos/${cursoId}`, { headers: { Authorization: `Bearer ${token}` } });
         alert('Curso eliminado con éxito.');
-        fetchData(); // Recargar la lista
+        fetchData();
       } catch (error) {
         console.error("Error al eliminar el curso:", error);
         alert('Error al eliminar el curso: ' + (error.response?.data?.msg || 'Puede que esté en uso.'));

@@ -56,7 +56,7 @@ const createAsignacion = async (req, res) => {
   try {
     await client.query('BEGIN');
 
-    // 1. Insertar en la tabla principal (ahora sin el curso)
+    //Insertar en la tabla principal
     const asignacionQuery = `
       INSERT INTO asignacion_docente (cui_docente, id_grado, id_seccion, anio, estado_id, usuario_agrego)
       VALUES ($1, $2, $3, $4, 1, $5) -- <-- CAMBIO: Corregido a $5
@@ -81,7 +81,7 @@ const createAsignacion = async (req, res) => {
   } catch (err) {
     await client.query('ROLLBACK');
     console.error('Error al crear asignación:', err.message);
-    if (err.code === '23505') { // unique_violation
+    if (err.code === '23505') { 
       return res.status(400).json({ msg: 'Esta asignación ya existe o contiene cursos duplicados.' });
     }
     res.status(500).json({ msg: 'Error en el servidor' });
@@ -94,7 +94,6 @@ const createAsignacion = async (req, res) => {
 const deleteAsignacion = async (req, res) => {
   const { id } = req.params;
   try {
-    // <-- CAMBIO: Usa el nuevo nombre de la tabla 'asignacion_docente'
     const result = await pool.query('DELETE FROM asignacion_docente WHERE id_asignacion = $1', [id]);
     if (result.rowCount === 0) {
       return res.status(404).json({ msg: 'Asignación no encontrada.' });

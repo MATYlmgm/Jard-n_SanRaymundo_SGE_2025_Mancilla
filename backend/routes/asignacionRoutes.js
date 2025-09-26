@@ -7,13 +7,13 @@ const {
     createAsignacion,
     deleteAsignacion,
     getCursosPorGrado,
-    getAsignacionById, // <-- Importar nueva función
-    updateAsignacion // <-- Importar nueva función
+    getAsignacionById, 
+    updateAsignacion
 } = require('../controllers/asignacionController');
 
 router.get('/', authMiddleware, getAsignaciones);
 router.post('/', authMiddleware, createAsignacion);
-router.put('/:id', authMiddleware, updateAsignacion); // <-- AÑADIR RUTA PUT
+router.put('/:id', authMiddleware, updateAsignacion); 
 router.delete('/:id', authMiddleware, deleteAsignacion);
 router.get('/cursos/:gradoId', authMiddleware, getCursosPorGrado);
 router.get('/:id', authMiddleware, getAsignacionById);

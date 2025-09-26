@@ -35,7 +35,7 @@ const CoordinatorDashboardStyles = () => (
 export default function CoordinatorDashboard() {
     const navigate = useNavigate();
 
-    // Opciones del menú con las rutas a los componentes que SÍ existen
+    // Opciones del menú con las rutas a los componentes
     const menuOptions = [
         { key: 'reg_docente', title: 'Gestionar Docentes', desc: 'Registrar y modificar personal docente.', icon: '👩‍🏫', path: '/docentes' },
         { key: 'reg_alumno', title: 'Gestionar Alumnos', desc: 'Inscribir nuevos estudiantes y asignarles padres.', icon: '📚', path: '/alumnos' },

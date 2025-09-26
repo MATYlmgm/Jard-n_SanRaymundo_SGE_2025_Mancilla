@@ -11,11 +11,10 @@ export default function EditarDocente() {
         email: "",
         telefono: "",
         estado_id: "1",
-        username: "", // ✅ Se añade 'username' al estado
-        password: "", // ✅ Se añade 'password' al estado
+        username: "",
+        password: "",
     });
     const [loading, setLoading] = useState(true);
-    // ✅ Se añade estado para la visibilidad de la contraseña
     const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
 
@@ -26,7 +25,6 @@ export default function EditarDocente() {
                 const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/teachers/${cui}`, {
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
-                // El backend ya envía el username, así que se carga automáticamente
                 setForm({ ...res.data, password: "", estado_id: String(res.data.estado_id) });
             } catch (error) {
                 alert('Error al cargar los datos del docente.');
@@ -68,11 +66,11 @@ export default function EditarDocente() {
                     <label className="tedit-label" htmlFor="nombre_completo">Nombre Completo</label>
                     <input id="nombre_completo" name="nombre_completo" className="tedit-input" value={form.nombre_completo} onChange={onChange} required />
 
-                    {/* ✅ Se añade el campo de Nombre de Usuario */}
+                    {/*Campo de Nombre de Usuario */}
                     <label className="tedit-label" htmlFor="username">Nombre de Usuario</label>
                     <input id="username" name="username" className="tedit-input" value={form.username || ''} onChange={onChange} required />
 
-                    {/* ✅ Se añade el campo de Contraseña con el "ojito" */}
+                    {/*campo de Contraseña con el "ojito" */}
                     <label className="tedit-label" htmlFor="password">Nueva Contraseña (dejar en blanco para no cambiar)</label>
                     <div className="tedit-password-wrapper">
                         <input 

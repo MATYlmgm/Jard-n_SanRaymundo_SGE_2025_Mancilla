@@ -4,7 +4,7 @@ import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import "./css/SecretaryPayments.css";
 
-// Componente de edición de mensaje (el que ya tenías, no cambia)
+// Componente de edición de mensaje 
 const MessageEditorModal = ({ student, onClose, onSend }) => {
     const defaultMessage = `Estimado/a ${student.nombre_padre}, le saludamos del Colegio "El Jardín". Le recordamos amablemente que el pago de la colegiatura para el/la estudiante ${student.nombre_completo} se encuentra pendiente. ¡Gracias!`;
     const [message, setMessage] = useState(defaultMessage);
@@ -77,7 +77,7 @@ export default function SecretaryPayments() {
     fetchData();
   }, [fetchData]);
 
-  // ✅ NUEVA FUNCIÓN: Marca el mes seleccionado como pagado para un estudiante.
+  // Marca el mes seleccionado como pagado para un estudiante.
   const handleMarkAsPaid = async (cui_estudiante) => {
     const monthName = monthOptions.find(m => m.value === selectedPeriod)?.label || selectedPeriod;
     if (window.confirm(`¿Confirmas el pago de ${monthName} para este estudiante?`)) {
@@ -242,7 +242,7 @@ export default function SecretaryPayments() {
                       <br />
                       <strong>Teléfono:</strong> {s.telefono || 'No asignado'}
                     </p>
-                    {/* --- AQUÍ ESTÁ LA CORRECCIÓN --- */}
+                    {/**/}
                     {s.meses_adeudados >= 2 && (
                         <div className="sp-blocked-indicator">
                             🚫 Bloqueado ({s.meses_adeudados} meses)
@@ -259,7 +259,7 @@ export default function SecretaryPayments() {
                     <button className="sp-chip sp-chipYellow" onClick={() => setEditingStudent(s)}>
                       ✏️ Enviar Recordatorio
                     </button>
-                    {/* ✅ CORRECCIÓN: Este botón solo aparece si el estado es PENDIENTE */}
+                    {/**/}
                     {s.estado_pago === 'PENDIENTE' && (
                       <button 
                         className="sp-chip sp-chipBlue" 

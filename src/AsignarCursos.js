@@ -13,7 +13,6 @@ const AsignarCursos = () => {
   const [asignaciones, setAsignaciones] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // --- LÓGICA DE EDICIÓN ---
   const [editingId, setEditingId] = useState(null); // ID de la asignación que se está editando
 
   // Estados del formulario
@@ -33,7 +32,6 @@ const AsignarCursos = () => {
     try {
       setLoading(true);
       const [docentesRes, gradosRes, asignacionesRes] = await Promise.all([
-        // ✅ CORRECCIÓN: Se usa la variable de entorno
         axios.get(`${API_URL}/api/teachers`, { headers: { Authorization: `Bearer ${token}` } }),
         axios.get(`${API_URL}/api/grades`, { headers: { Authorization: `Bearer ${token}` } }),
         axios.get(`${API_URL}/api/asignaciones`, { headers: { Authorization: `Bearer ${token}` } }),
@@ -60,7 +58,6 @@ const AsignarCursos = () => {
       try {
         const [seccionesRes, cursosRes] = await Promise.all([
           axios.get(`${API_URL}/api/grades/${gradoId}/sections`, { headers: { Authorization: `Bearer ${token}` } }),
-          // ✅ CORRECCIÓN: Se ajusta la ruta a la correcta del backend
           axios.get(`${API_URL}/api/asignaciones/cursos/${gradoId}`, { headers: { Authorization: `Bearer ${token}` } })
         ]);
         setSecciones(seccionesRes.data);

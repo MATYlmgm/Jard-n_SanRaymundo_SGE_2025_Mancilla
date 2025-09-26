@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { auth } from "./auth";
-import './css/SecretaryDashboard.css'; // Crearemos este CSS a continuación
+import './css/SecretaryDashboard.css';
 
 export default function SecretaryDashboard() {
     const navigate = useNavigate();

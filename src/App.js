@@ -50,9 +50,10 @@ export default function App() {
         <Route path="/seleccionar-docente" element={<ProtectedRoute><SeleccionarDocente/></ProtectedRoute>} />
         <Route path="/ver-docente/:cui" element={<ProtectedRoute><TeacherDashboard /></ProtectedRoute>} />
         
-        {/* Ruta "atrapa-todo" que redirige al login si no se encuentra la página */}
+        {/* Ruta que redirige al login si no se encuentra la página */}
         <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>
     </BrowserRouter>
   );
 }
+

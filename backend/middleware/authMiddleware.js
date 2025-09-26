@@ -21,8 +21,6 @@ module.exports = function authMiddleware(req, res, next) {
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     
-    // CORRECCIÓN CLAVE: Asignamos el objeto `user` del payload a `req.user`.
-    // Esto asegura que `req.user.username` esté siempre disponible.
     req.user = decoded.user;
 
     next();

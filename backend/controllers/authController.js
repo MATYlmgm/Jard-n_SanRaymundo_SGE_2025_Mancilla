@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken');
 const loginUser = async (req, res) => {
   const { username, password } = req.body;
   try {
-    // La consulta ahora también pide el rol_id y el cui_docente
+    // La consulta pide el rol_id y el cui_docente
     const userQuery = await pool.query(
       'SELECT id_usuario, username, password, rol_id, cui_docente FROM usuarios WHERE username = $1 AND estado_id = 1', 
       [username]
@@ -38,8 +38,6 @@ const loginUser = async (req, res) => {
       { expiresIn: '5h' },
       (err, token) => {
         if (err) throw err;
-        // --- ESTA ES LA CORRECCIÓN CLAVE ---
-        // Ahora la respuesta incluye el 'accessToken' y el objeto 'user'
         res.json({
           accessToken: token,
           user: payload.user // Enviamos el mismo objeto que usamos para firmar el token
